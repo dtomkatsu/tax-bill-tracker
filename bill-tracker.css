@@ -1,0 +1,595 @@
+/* ========== BILL TRACKER WIDGET STYLES (INLINE) ========== */
+.tfc-bill-tracker {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 1px solid #e2e8f0;
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 20px;
+    margin-top: -1px;
+    position: relative;
+}
+.tfc-bill-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.tfc-bill-col {
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+.tfc-bill-col:hover {
+    background: rgba(36, 53, 81, 0.05);
+}
+.tfc-bill-col.active {
+    background: rgba(36, 53, 81, 0.1);
+    border: 1px solid rgba(36, 53, 81, 0.2);
+}
+.tfc-bill-col h4 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 8px 0;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 4px;
+}
+.tfc-bill-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #243551;
+}
+.tfc-bill-number a {
+    color: #243551;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.tfc-bill-number a:hover {
+    color: #3b82f6;
+    text-decoration: underline;
+}
+.tfc-status-section {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.tfc-bill-status-section {
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+.tfc-bill-status-section:last-child {
+    border-bottom: none;
+}
+.tfc-bill-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+}
+.tfc-bill-status-header strong {
+    color: #243551;
+    font-weight: 700;
+}
+.tfc-bill-latest {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #4a5568;
+}
+.tfc-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.tfc-status-header:hover {
+    background: #f1f5f9;
+}
+.tfc-status-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4a5568;
+}
+.tfc-status-toggle {
+    font-size: 0.75rem;
+    color: #3a5278;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.tfc-status-toggle::after {
+    content: '\25BC';
+    font-size: 0.6rem;
+    transition: transform 0.3s ease;
+}
+.tfc-status-section.expanded .tfc-status-toggle::after {
+    transform: rotate(180deg);
+}
+.tfc-status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    background: #ebf8ff;
+    color: #2b6cb0;
+    margin-left: 8px;
+}
+.tfc-badge-enacted { background: #c6f6d5; color: #22543d; }
+.tfc-badge-passed { background: #c6f6d5; color: #276749; }
+.tfc-badge-progress { background: #bee3f8; color: #ffffff; }
+.tfc-badge-hearing { background: #feebc8; color: #c05621; }
+.tfc-badge-referred { background: #e9d8fd; color: #6b46c1; }
+.tfc-badge-deferred { background: #fed7d7; color: #c53030; }
+.tfc-badge-new { background: #e2e8f0; color: #4a5568; }
+.tfc-badge-update { background: #ebf8ff; color: #2b6cb0; }
+.tfc-latest-update {
+    padding: 16px;
+    font-size: 0.85rem;
+    color: #2d3748;
+    line-height: 1.5;
+    border-top: 1px solid #e2e8f0;
+}
+.tfc-status-date {
+    display: block;
+    font-size: 0.7rem;
+    color: #718096;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+.tfc-loading {
+    color: #718096;
+    font-style: italic;
+}
+.tfc-status-history {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    padding: 0 16px;
+}
+.tfc-status-section.expanded .tfc-status-history {
+    max-height: 400px;
+    padding: 0 16px 16px;
+    overflow-y: auto;
+}
+.tfc-history-item {
+    padding: 12px;
+    border-left: 2px solid #cbd5e0;
+    margin-left: 8px;
+    position: relative;
+    font-size: 0.8rem;
+    color: #4a5568;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+.tfc-history-item::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 14px;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border: 2px solid #cbd5e0;
+    border-radius: 50%;
+}
+.tfc-history-item:last-child {
+    border-left-color: transparent;
+    margin-bottom: 0;
+}
+.tfc-tracker-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+}
+.tfc-last-updated {
+    font-size: 0.65rem;
+    color: #a0aec0;
+}
+.tfc-refresh-btn {
+    background: none;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    color: #718096;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.tfc-refresh-btn:hover {
+    background: #f7fafc;
+    border-color: #cbd5e0;
+    color: #4a5568;
+}
+.tfc-card-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.tfc-card-wrapper .tfc-card {
+    border-radius: 16px 16px 0 0;
+    margin-bottom: 0;
+}
+.tfc-card-wrapper .tfc-bill-tracker {
+    border-radius: 0 0 16px 16px;
+}
+.tfc-legislation-header {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #243551;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 12px 0;
+    border-bottom: 2px solid #e2e8f0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+.tfc-legislation-header:hover {
+    color: #3a5278;
+    background: rgba(36, 53, 81, 0.03);
+    margin: 0 -20px;
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+.tfc-legislation-toggle-icon::after {
+    content: '\25BC';
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+.tfc-bill-tracker.expanded .tfc-legislation-toggle-icon::after {
+    transform: rotate(180deg);
+}
+.tfc-tracker-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease-out, opacity 0.3s ease, margin-top 0.3s ease;
+    margin-top: 0;
+}
+.tfc-bill-tracker.expanded .tfc-tracker-content {
+    max-height: 800px;
+    opacity: 1;
+    margin-top: 16px;
+}
+.tfc-status-history::-webkit-scrollbar { width: 6px; }
+.tfc-status-history::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 3px; }
+.tfc-status-history::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 3px; }
+.tfc-status-history::-webkit-scrollbar-thumb:hover { background: #a0aec0; }
+.tfc-sample-testimony {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-top: 1px solid #f1f5f9;
+    border-radius: 0 0 16px 16px;
+    margin-top: -1px;
+    transition: background 0.2s ease;
+    gap: 16px;
+}
+.tfc-sample-testimony:hover { background: #f8fafc; }
+.tfc-sample-testimony-content {
+    display: flex;
+    flex-direction: column;
+}
+.tfc-sample-testimony-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+}
+.tfc-sample-testimony a.tfc-testimony-link {
+    color: #3a5278;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease;
+}
+.tfc-sample-testimony a.tfc-testimony-link:hover { color: #243551; }
+.tfc-sample-testimony a.tfc-testimony-link::after {
+    content: '\2192';
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+.tfc-sample-testimony a.tfc-testimony-link:hover::after { transform: translateX(4px); }
+.tfc-sample-testimony .tfc-more-btn {
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #243551 0%, #3a5278 100%);
+    color: #fff !important;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none !important;
+    border-radius: 8px;
+    text-align: center;
+    border: none;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+.tfc-sample-testimony .tfc-more-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(36, 53, 81, 0.3);
+}
+.tfc-card-wrapper .tfc-bill-tracker.has-testimony {
+    border-radius: 0;
+    border-bottom: none;
+}
+.tfc-policy-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 16px;
+    padding-left: 16px;
+    border-left: 1px solid #e2e8f0;
+}
+.tfc-policy-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.tfc-policy-toggle {
+    display: inline-flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e0;
+}
+.tfc-policy-toggle-btn {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: #475569;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+.tfc-policy-toggle-btn:hover:not(.active) {
+    color: #475569;
+    background: rgba(255, 255, 255, 0.5);
+}
+.tfc-policy-toggle-btn.active {
+    background: #fff;
+    color: #243551;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.tfc-card-title-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.tfc-card-title-row .tfc-card-title { margin-bottom: 0; }
+.tfc-hearings-widget {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 480px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    max-height: calc(100vh - 120px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.tfc-hearings-header {
+    padding: 16px;
+    background: linear-gradient(135deg, #243551 0%, #3a5278 100%);
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tfc-hearings-title { font-size: 1.1rem; font-weight: 700; margin: 0; color: #fff; }
+.tfc-hearings-toggle {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+.tfc-hearings-widget.collapsed .tfc-hearings-toggle { transform: rotate(180deg); }
+.tfc-hearings-content {
+    max-height: 500px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease;
+}
+.tfc-hearings-widget.collapsed .tfc-hearings-content { max-height: 0; overflow: hidden; }
+.tfc-hearing-item {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.2s ease;
+}
+.tfc-hearing-item:hover { background: #f8fafc; }
+.tfc-hearing-item:last-child { border-bottom: none; }
+.tfc-hearing-bill { font-size: 0.95rem; font-weight: 700; color: #243551; margin-bottom: 6px; }
+.tfc-hearing-bill a {
+    color: #243551;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.tfc-hearing-bill a:hover {
+    color: #3b82f6;
+    text-decoration: underline;
+}
+.tfc-hearing-date {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.tfc-hearing-date::before { content: '\1F4C5'; font-size: 0.8rem; }
+.tfc-hearing-desc { font-size: 0.9rem; color: #475569; line-height: 1.5; }
+.tfc-hearings-empty { padding: 24px 16px; text-align: center; color: #94a3b8; font-size: 0.8rem; }
+.tfc-hearings-loading { padding: 24px 16px; text-align: center; color: #94a3b8; font-size: 0.8rem; font-style: italic; }
+.tfc-hearings-content::-webkit-scrollbar { width: 6px; }
+.tfc-hearings-content::-webkit-scrollbar-track { background: #f1f5f9; }
+.tfc-hearings-content::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 3px; }
+.tfc-hearings-content::-webkit-scrollbar-thumb:hover { background: #a0aec0; }
+
+/* Bill Status Table Styles */
+.tfc-bill-status-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+.tfc-bill-status-table thead {
+    background: #f8fafc;
+    border-bottom: 2px solid #e2e8f0;
+}
+.tfc-bill-status-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #475569;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.tfc-bill-status-table tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.2s ease;
+}
+.tfc-bill-status-table tbody tr:hover {
+    background: #f8fafc;
+}
+.tfc-bill-status-table tbody tr.has-hearing {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+}
+.tfc-bill-status-table tbody tr.has-hearing:hover {
+    background: #fde68a;
+}
+.tfc-bill-status-table td {
+    padding: 14px 16px;
+    color: #334155;
+    vertical-align: top;
+}
+.tfc-bill-status-table td.bill-number {
+    font-weight: 600;
+    color: #243551;
+    white-space: nowrap;
+}
+.tfc-bill-status-table td.bill-number a {
+    color: #243551;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.tfc-bill-status-table td.bill-number a:hover {
+    color: #3b82f6;
+    text-decoration: underline;
+}
+.tfc-bill-status-table td.issue-area {
+    font-weight: 500;
+    color: #475569;
+}
+.tfc-bill-status-table td.latest-status {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+.tfc-bill-status-table td.latest-status .status-date {
+    font-weight: 600;
+    color: #475569;
+    margin-right: 6px;
+}
+.tfc-bill-status-table .hearing-indicator {
+    display: inline-block;
+    background: #f59e0b;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+@media (max-width: 768px) {
+    .tfc-bill-status-table {
+        font-size: 0.8rem;
+    }
+    .tfc-bill-status-table th,
+    .tfc-bill-status-table td {
+        padding: 10px 12px;
+    }
+    .tfc-bill-status-table td.latest-status {
+        font-size: 0.75rem;
+    }
+}
+@media (max-width: 600px) {
+    .tfc-policy-wrapper {
+        margin-left: 0;
+        padding-left: 0;
+        border-left: none;
+        margin-top: 8px;
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+@media (max-width: 1024px) {
+    .tfc-hearings-widget {
+        position: static;
+        width: 100%;
+        margin: 20px auto;
+        max-width: 95%;
+    }
+}
+@media (max-width: 480px) {
+    .tfc-container {
+        padding: 12px;
+    }
+    .tfc-bill-columns { grid-template-columns: 1fr; gap: 8px; }
+    .tfc-bill-col { padding: 10px; }
+    .tfc-bill-tracker { padding: 16px; margin-left: 0; margin-right: 0; }
+    .tfc-card-title-row { flex-direction: column; align-items: flex-start; }
+    .tfc-card {
+        padding: 16px;
+        padding-top: 20px;
+    }
+    .tfc-policy-toggle {
+        width: 100%;
+    }
+    .tfc-policy-toggle-btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+}
+/* ========== END BILL TRACKER WIDGET STYLES ========== */

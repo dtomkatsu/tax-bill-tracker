@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-08-12T19:54:18.779Z",
+  "source": "capitol.hawaii.gov RSS, fetched via GitHub Actions",
+  "trackers": [
+    {
+      "trackerId": "example-one",
+      "issueArea": "Example Proposal One",
+      "year": "2027",
+      "hbNumbers": [
+        "101"
+      ],
+      "sbNumbers": [
+        "201"
+      ]
+    },
+    {
+      "trackerId": "example-two",
+      "issueArea": "Example Proposal Two",
+      "year": "2027",
+      "hbNumbers": [
+        "102"
+      ],
+      "sbNumbers": []
+    }
+  ],
+  "bills": {
+    "HB101": {
+      "type": "HB",
+      "number": "101",
+      "year": "2027",
+      "error": "HTTP 404"
+    },
+    "SB201": {
+      "type": "SB",
+      "number": "201",
+      "year": "2027",
+      "error": "HTTP 404"
+    },
+    "HB102": {
+      "type": "HB",
+      "number": "102",
+      "year": "2027",
+      "error": "HTTP 404"
+    }
+  }
+}

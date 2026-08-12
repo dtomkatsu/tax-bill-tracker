@@ -1,0 +1,95 @@
+<!--
+  Minimal working example of the bill tracker widget: one per-proposal mini
+  tracker, one policy-toggle tracker (two bills sharing one card), and the
+  optional master "Bill Status Tracker" summary table.
+
+  This file is also what scripts/fetch-bill-status.mjs SCANS to discover which
+  bills to fetch — see TRACKED_PAGES in that file and "Where the bill list
+  lives" in README.md. Keep a copy of whatever page you actually embed
+  trackers in here (mirroring what you paste into your CMS), or add its path
+  to TRACKED_PAGES.
+
+  The .tfc-card / .tfc-container / .tfc-grid styles just below are placeholder
+  shell CSS for this demo only — NOT part of the reusable widget. Replace them
+  with your own site's card design; bill-tracker.js and bill-tracker.css don't
+  care what the surrounding card looks like, only about the .tfc-bill-tracker
+  div's data-* attributes.
+
+  No <html>/<head>/<body> on purpose: this fragment is meant to be pasted
+  directly into a CMS code-injection block (Squarespace, WordPress custom
+  HTML, etc.), the same way the Hawaii Tax Fairness Coalition site does it.
+-->
+<style>
+.tfc-container { max-width: 900px; margin: 0 auto; padding: 24px; font-family: -apple-system, sans-serif; }
+.tfc-grid { display: grid; gap: 32px; }
+.tfc-card-wrapper { display: flex; flex-direction: column; }
+.tfc-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px 16px 0 0; padding: 20px; }
+.tfc-card-title { font-size: 1.2rem; font-weight: 700; color: #243551; margin-bottom: 8px; }
+.tfc-card-revenue { font-size: 0.9rem; font-weight: 600; color: #38a169; margin-bottom: 8px; }
+.tfc-card-desc { font-size: 0.9rem; color: #4a5568; line-height: 1.5; }
+</style>
+
+<div class="tfc-container">
+  <h2>Bills We're Tracking</h2>
+
+  <div class="tfc-grid">
+
+    <!-- Example 1: a single bill (House + Senate companion versions) -->
+    <div class="tfc-card-wrapper">
+      <div class="tfc-card">
+        <div class="tfc-card-title">Example Proposal One</div>
+        <div class="tfc-card-revenue">$0 Revenue (placeholder)</div>
+        <div class="tfc-card-desc">Replace this card with your own proposal's copy.</div>
+      </div>
+      <!-- The only part that matters to the tracker: this div and its data-* attributes.
+           data-tracker-id must be unique on the page. data-hb/data-sb are comma-separated
+           if a proposal has multiple bill numbers (e.g. data-hb="101,102"). -->
+      <div class="tfc-bill-tracker"
+           data-tracker-id="example-one"
+           data-issue-area="Example Proposal One"
+           data-hb="101"
+           data-sb="201"
+           data-year="2027">
+      </div>
+    </div>
+
+    <!-- Example 2: a bill with no Senate companion (data-sb left empty) -->
+    <div class="tfc-card-wrapper">
+      <div class="tfc-card">
+        <div class="tfc-card-title">Example Proposal Two</div>
+        <div class="tfc-card-revenue">$0 Revenue (placeholder)</div>
+        <div class="tfc-card-desc">House-only example - data-sb is empty.</div>
+      </div>
+      <div class="tfc-bill-tracker"
+           data-tracker-id="example-two"
+           data-issue-area="Example Proposal Two"
+           data-hb="102"
+           data-sb=""
+           data-year="2027">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Optional: master summary table across every tracked bill on the page.
+       Delete this whole block if you only want the per-proposal mini trackers above. -->
+  <h3 style="margin-top: 48px;">All Tracked Bills</h3>
+  <div id="bill-status-widget" style="position: static; margin: 24px auto;">
+    <label style="display:flex; align-items:center; gap:8px; margin-bottom:12px; font-size:0.9rem;">
+      <input type="checkbox" id="alive-filter" checked onchange="BillTracker.filterBillStatus()">
+      Show only active bills
+    </label>
+    <div id="bill-status-content"></div>
+  </div>
+
+</div>
+
+<!-- Local testing: this relative src works because bill-tracker.js self-locates its
+     data file next to wherever IT was loaded from (see the SELF_URL comment in that
+     file) — python3 -m http.server from the repo root and open this file, no edits
+     needed. BEFORE pasting into a real CMS, change this to the absolute GitHub Pages
+     URL of your fork (https://<you>.github.io/<repo>/bill-tracker.js) — a relative
+     src pasted into Squarespace/WordPress/etc. resolves against THAT site's domain
+     and 404s. See README.md "Quick diagnostics" if trackers show nothing. -->
+<link rel="stylesheet" href="bill-tracker.css">
+<script src="bill-tracker.js"></script>

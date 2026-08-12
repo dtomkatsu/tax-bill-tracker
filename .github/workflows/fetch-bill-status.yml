@@ -1,0 +1,56 @@
+name: Fetch bill status
+
+# Fetches RSS status for tracked bills and commits data/bill-status.json.
+# The bill list is NOT configured here: scripts/fetch-bill-status.mjs discovers it
+# from data-hb/data-sb attributes in the tracked HTML page(s), so adding/removing a
+# bill is a content edit (in demo.html or whatever page you track), not a workflow edit.
+#
+# NOTE if you forked this repo rather than creating it fresh: GitHub disables
+# scheduled workflows on forks by default. Go to the Actions tab of your fork and
+# click "I understand my workflows, go ahead and enable them," then confirm this
+# workflow specifically is enabled. Also: GitHub auto-disables scheduled workflows
+# again after ~60 days with no repo activity — an occasional commit (even a doc
+# tweak) resets that clock.
+
+on:
+  schedule:
+    # Every 30 minutes. The page only ever shows data this workflow already wrote
+    # (no live client-side fetching), so this interval is the only thing controlling
+    # freshness.
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: fetch-bill-status
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch bill status
+        run: node scripts/fetch-bill-status.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/bill-status.json
+          if git diff --cached --quiet; then
+            echo "no change"
+            exit 0
+          fi
+          git commit -m "bill-status: refresh"
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin main && git push && break
+            echo "push attempt $attempt failed; retrying"
+            sleep 5
+          done
