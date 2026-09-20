@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T05:45:18.904Z",
+  "generatedAt": "2026-09-20T23:00:39.643Z",
   "source": "capitol.hawaii.gov RSS, fetched via GitHub Actions",
   "trackers": [
     {
@@ -28,7 +28,7 @@
       "type": "HB",
       "number": "101",
       "year": "2027",
-      "error": "HTTP 404"
+      "error": "invalid RSS response"
     },
     "SB201": {
       "type": "SB",
